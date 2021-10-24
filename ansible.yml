@@ -16,7 +16,7 @@
     - name: Clone a github repository
       git:
        repo: https://github.com/ravitejaviyyuri/food.git
-       dest: /var/www/html
+       dest: /home/ubuntu
        clone: yes
        update: yes
 
