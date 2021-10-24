@@ -15,7 +15,7 @@
 
     - name: Clone a github repository
       git:
-       repo: https://github.com/ravitejaviyyuri/petclinic_java.git
+       repo: https://github.com/ravitejaviyyuri/food.git
        dest: /var/www/html
        clone: yes
        update: yes
@@ -25,9 +25,9 @@
       apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
       with_items:
         - maven
-    - name: maven clean package
-      command: mvn -f /var/www/html/pom.xml clean package
-      # register: mvn_result
+#     - name: maven clean package
+#       command: mvn -f /var/www/html/pom.xml clean package
+#       register: mvn_result
 
   handlers:
     - name: Restart Nginx
