@@ -1,0 +1,37 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    
+#     - name: Register ssh key at node
+#       command: ssh-copy-id -i /home/ubuntu/.ssh/id_rsa.pub -o StrictHostKeyChecking=no ubuntu@172.31.23.188
+
+    - name: update
+      apt: update_cache=yes
+   
+    - name: Install Nginx
+      apt: name=nginx state=latest
+      notify: Restart Nginx
+
+    - name: Clone a github repository
+      git:
+       repo: https://github.com/ravitejaviyyuri/petclinic_java.git
+       dest: /var/www/html
+       clone: yes
+       update: yes
+
+    - name: install maven (and other packages if needed)
+      become: yes
+      apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
+      with_items:
+        - maven
+    - name: maven clean package
+      command: mvn -f /var/www/html/pom.xml clean package
+      # register: mvn_result
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+    
