@@ -12,6 +12,8 @@
     - name: Install Nginx
       apt: name=nginx state=latest
       notify: Restart Nginx
+    - name: remove unnecessary files
+      command: rm -rf /home/ubuntu/var/www/html/
 
     - name: Clone a github repository
       git:
