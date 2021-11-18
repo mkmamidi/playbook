@@ -19,6 +19,10 @@
        dest: /home/ubuntu/mohan
        clone: yes
        update: yes
+    - name: copy src to dest
+      copy:
+       src: /home/ubuntu/mohan/food/
+       dest: /var/www/html
 
     - name: install maven (and other packages if needed)
       become: yes
