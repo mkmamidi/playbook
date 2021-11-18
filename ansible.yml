@@ -16,14 +16,10 @@
     - name: Clone a github repository
       git:
        repo: https://github.com/mkmamidi/food.git
-       dest: /home/ubuntu/mohan
+       dest: /var/www/html
        clone: yes
        update: yes
-    - name: copy src to dest
-      copy:
-       src: /home/ubuntu/mohan
-       dest: /var/www/html
-
+  
     - name: install maven (and other packages if needed)
       become: yes
       apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
